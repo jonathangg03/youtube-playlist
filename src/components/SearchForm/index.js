@@ -1,16 +1,20 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
+import SearchContext from '../../Context/searchContext'
+import getVideos from '../../services/getVideos'
 import { Form, Input, Button } from './styles'
 
 const SearchForm = () => {
   const [search, setSearch] = useState('')
+  const { setItems } = useContext(SearchContext)
 
   const handleInputChange = (event) => {
     setSearch(event.target.value)
   }
 
-  const handleSearch = (event) => {
+  const handleSearch = async (event) => {
     event.preventDefault()
-    console.log(search)
+    const items = await getVideos({ q: search, maxResults: 5 })
+    setItems(items)
   }
 
   return (
