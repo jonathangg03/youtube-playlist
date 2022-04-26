@@ -4,12 +4,19 @@ const Context = createContext({})
 
 const SearchContextProvider = ({ children }) => {
   const [items, setItems] = useState([])
+  const [search, setSearch] = useState({
+    query: '',
+    maxResults: 1,
+    nextPageToken: ''
+  })
 
   return (
     <Context.Provider
       value={{
         items,
-        setItems
+        setItems,
+        search,
+        setSearch
       }}
     >
       {children}

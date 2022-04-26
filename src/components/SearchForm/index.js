@@ -1,30 +1,47 @@
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import SearchContext from '../../Context/searchContext'
 import getVideos from '../../services/getVideos'
-import { Form, Input, Button } from './styles'
+import { Form, SearchInput, Button, NumberInput, MaxLabel } from './styles'
 
 const SearchForm = () => {
-  const [search, setSearch] = useState('')
-  const { setItems } = useContext(SearchContext)
+  const { setItems, search, setSearch } = useContext(SearchContext)
 
   const handleInputChange = (event) => {
-    setSearch(event.target.value)
+    setSearch({
+      ...search,
+      [event.target.name]: event.target.value
+    })
   }
 
   const handleSearch = async (event) => {
     event.preventDefault()
-    const items = await getVideos({ q: search, maxResults: 5 })
-    setItems(items)
+    const results = await getVideos({
+      q: search.query,
+      maxResults: search.maxResults
+    })
+    setItems(results.items)
+    setSearch({ ...search, nextPageToken: results.nextPageToken })
   }
 
   return (
     <>
       <Form onSubmit={handleSearch}>
-        <Input
+        <SearchInput
           placeholder='Ingresa una palabra para realizar una busqueda...'
-          value={search}
+          value={search.query}
           onChange={handleInputChange}
+          name='query'
         />
+        <MaxLabel>
+          <span>Cantidad de resultados: </span>
+          <NumberInput
+            type='number'
+            name='maxResults'
+            onChange={handleInputChange}
+            min={1}
+            value={search.maxResults}
+          />
+        </MaxLabel>
         <Button>Buscar</Button>
       </Form>
     </>
