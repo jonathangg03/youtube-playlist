@@ -1,5 +1,6 @@
-import { useContext, useRef, useEffect } from 'react'
+import { useContext } from 'react'
 import VideosList from '../VideosList'
+import PlayList from '../Playlist'
 import SearchContext from '../../Context/searchContext'
 import { Title } from './styles'
 import SearchForm from '../SearchForm'
@@ -26,6 +27,7 @@ const App = () => {
       <SearchForm />
       <VideosList items={items} />
       {items.length && <Button onClick={handleSearch}>Cargar más</Button>}
+      <PlayList></PlayList>
     </>
   )
 }
