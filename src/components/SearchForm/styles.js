@@ -7,19 +7,35 @@ const Form = styled.form`
   align-items: center;
 `
 
-const Input = styled.input`
+const SearchInput = styled.input`
   height: 40px;
   width: 100%;
   max-width: 700px;
   outline: none;
   border: 2px solid gray;
-  margin: 0 auto;
+  margin: 0 auto 10px;
   padding: 0 15px;
   font-family: ${fonts.main};
 `
 
+const NumberInput = styled.input`
+  height: 40px;
+  outline: none;
+  border: 2px solid gray;
+  margin: 0 auto;
+  padding: 0 15px;
+  font-family: ${fonts.main};
+  margin-left: 10px;
+`
+
+const MaxLabel = styled.label`
+  font-size: 1.4rem;
+  display: inline-block;
+`
+
 const Button = styled.button`
   border: none;
+  display: block;
   padding: 10px 0;
   font-family: ${fonts.main};
   font-size: 1.6rem;
@@ -31,4 +47,4 @@ const Button = styled.button`
   color: white;
 `
 
-export { Form, Input, Button }
+export { Form, SearchInput, NumberInput, Button, MaxLabel }
