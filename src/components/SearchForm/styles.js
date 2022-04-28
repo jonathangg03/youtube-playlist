@@ -5,32 +5,23 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
+  max-width: 728px;
+  margin: 0 auto;
 `
 
 const SearchInput = styled.input`
   height: 40px;
   width: 100%;
-  max-width: 700px;
   outline: none;
   border: 2px solid gray;
-  margin: 0 auto 10px;
+  margin: 0 0 10px;
   padding: 0 15px;
   font-family: ${fonts.main};
-`
-
-const NumberInput = styled.input`
-  height: 40px;
-  outline: none;
-  border: 2px solid gray;
-  margin: 0 auto;
-  padding: 0 15px;
-  font-family: ${fonts.main};
-  margin-left: 10px;
 `
 
 const MaxLabel = styled.label`
   font-size: 1.4rem;
-  display: inline-block;
+  width: 100%;
 `
 
 const Button = styled.button`
@@ -47,4 +38,4 @@ const Button = styled.button`
   color: white;
 `
 
-export { Form, SearchInput, NumberInput, Button, MaxLabel }
+export { Form, SearchInput, Button, MaxLabel }

@@ -17,6 +17,7 @@ const App = () => {
       maxResults: search.maxResults,
       pageToken: search.nextPageToken
     })
+
     setItems((prev) => prev.concat(results.items))
     setSearch({ ...search, nextPageToken: results.nextPageToken })
   }

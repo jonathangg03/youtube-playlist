@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import SearchContext from '../../Context/searchContext'
 import getVideos from '../../services/getVideos'
-import { Form, SearchInput, Button, NumberInput, MaxLabel } from './styles'
+import { Form, SearchInput, Button, MaxLabel } from './styles'
 
 const SearchForm = () => {
   const { setItems, search, setSearch } = useContext(SearchContext)
@@ -19,6 +19,7 @@ const SearchForm = () => {
       q: search.query,
       maxResults: search.maxResults
     })
+    console.log('Results:', results)
     setItems(results.items)
     setSearch({ ...search, nextPageToken: results.nextPageToken })
   }
@@ -34,7 +35,7 @@ const SearchForm = () => {
         />
         <MaxLabel>
           <span>Cantidad de resultados: </span>
-          <NumberInput
+          <SearchInput
             type='number'
             name='maxResults'
             onChange={handleInputChange}
