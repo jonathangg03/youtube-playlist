@@ -9,6 +9,7 @@ const SearchContextProvider = ({ children }) => {
     maxResults: 1,
     nextPageToken: ''
   })
+  const [playlistVideos, setPlaylistVideos] = useState([])
 
   return (
     <Context.Provider
@@ -16,7 +17,9 @@ const SearchContextProvider = ({ children }) => {
         items,
         setItems,
         search,
-        setSearch
+        setSearch,
+        playlistVideos,
+        setPlaylistVideos
       }}
     >
       {children}

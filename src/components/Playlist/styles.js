@@ -21,4 +21,8 @@ const PlayListContainer = styled.ul`
     max-width: 984px;
   }
 `
-export { PlayListContainer }
+
+const VideoItem = styled.iframe`
+  width: 100%;
+`
+export { PlayListContainer, VideoItem }

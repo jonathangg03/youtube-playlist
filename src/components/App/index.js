@@ -6,9 +6,11 @@ import { Title } from './styles'
 import SearchForm from '../SearchForm'
 import getVideos from '../../services/getVideos'
 import { Button } from '../SearchForm/styles'
+import { DragDropContext } from 'react-beautiful-dnd'
 
 const App = () => {
-  const { items, setSearch, search, setItems } = useContext(SearchContext)
+  const { items, setSearch, search, setItems, setPlaylistVideos } =
+    useContext(SearchContext)
 
   const handleSearch = async (event) => {
     event.preventDefault()
@@ -22,13 +24,19 @@ const App = () => {
     setSearch({ ...search, nextPageToken: results.nextPageToken })
   }
 
+  const handleOnDragEnd = (result) => {
+    setPlaylistVideos((prev) => prev.concat(result.draggableId))
+  }
+
   return (
     <>
-      <Title>YouTube Playlist Creator</Title>
-      <SearchForm />
-      <VideosList items={items} />
-      {items.length && <Button onClick={handleSearch}>Cargar más</Button>}
-      <PlayList></PlayList>
+      <DragDropContext onDragEnd={handleOnDragEnd}>
+        <Title>YouTube Playlist Creator</Title>
+        <SearchForm />
+        <VideosList items={items} />
+        {items.length && <Button onClick={handleSearch}>Cargar más</Button>}
+        <PlayList></PlayList>
+      </DragDropContext>
     </>
   )
 }
