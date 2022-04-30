@@ -19,7 +19,6 @@ const SearchForm = () => {
       q: search.query,
       maxResults: search.maxResults
     })
-    console.log('Results:', results)
     setItems(results.items)
     setSearch({ ...search, nextPageToken: results.nextPageToken })
   }

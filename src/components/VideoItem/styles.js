@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const Video = styled.iframe`
+const Video = styled.img`
   width: 100%;
 `
 
