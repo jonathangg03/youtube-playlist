@@ -1,10 +1,11 @@
 import styled from 'styled-components'
 
 const VideoList = styled.ul`
-  border: 1px solid black;
+  background-color: #f7f7f7;
+  padding: 20px;
   width: 1000px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr;
   overflow-y: auto;
   gap: 20px;
   margin: 20px auto 0;
@@ -15,11 +16,13 @@ const VideoList = styled.ul`
   max-width: 280px;
 
   @media screen and (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
     max-width: 728px;
   }
 
   @media screen and (min-width: 1024px) {
     max-width: 984px;
+    grid-template-columns: repeat(3, 1fr);
   }
 `
 
