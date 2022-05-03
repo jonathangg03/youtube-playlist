@@ -25,6 +25,7 @@ const App = () => {
   }
 
   const handleOnDragEnd = (result) => {
+    console.log(result)
     if (result.destination.droppableId !== result.source.droppableId) {
       setItems((prev) =>
         prev.filter((el) => el.id.videoId !== result.draggableId)

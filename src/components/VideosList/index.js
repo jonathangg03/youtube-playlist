@@ -1,6 +1,6 @@
 import VideoItem from '../VideoItem'
 import { VideoList } from './styles'
-import { Droppable, Draggable, DragDropContext } from 'react-beautiful-dnd'
+import { Droppable, Draggable } from 'react-beautiful-dnd'
 
 const VideosList = ({ items }) => {
   return (
@@ -14,6 +14,7 @@ const VideosList = ({ items }) => {
                   key={item.id.videoId}
                   draggableId={item.id.videoId}
                   index={index}
+                  cas={item}
                 >
                   {(provided) => {
                     return (

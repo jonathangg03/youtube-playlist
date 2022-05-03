@@ -8,7 +8,7 @@ const VideoList = styled.ul`
   grid-template-columns: 1fr;
   overflow-y: auto;
   gap: 20px;
-  margin: 20px auto 0;
+  margin: 20px auto;
   list-style: none;
   min-height: 300px;
   max-height: 620px;
