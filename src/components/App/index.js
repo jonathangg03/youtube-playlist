@@ -25,7 +25,13 @@ const App = () => {
   }
 
   const handleOnDragEnd = (result) => {
-    setPlaylistVideos((prev) => prev.concat(result.draggableId))
+    console.log(result)
+    if (result.destination.droppableId !== result.source.droppableId) {
+      setItems((prev) =>
+        prev.filter((el) => el.id.videoId !== result.draggableId)
+      )
+      setPlaylistVideos((prev) => prev.concat(result.draggableId))
+    }
   }
 
   return (

@@ -1,11 +1,31 @@
-import { useContext } from 'react'
-import { PlayListContainer } from './styles'
+import { useContext, useEffect, useState } from 'react'
 import { Droppable, Draggable } from 'react-beautiful-dnd'
-import { VideoItem } from './styles'
+import getVideo from '../../services/getVideo'
+import {
+  PlayListContainer,
+  CardContainer,
+  CardContent,
+  CardDescription,
+  CardImage,
+  CardTitle
+} from './styles'
 import searchContext from '../../Context/searchContext'
 
 const PlayList = () => {
   const { playlistVideos } = useContext(searchContext)
+  const [videos, setVideos] = useState([])
+
+  useEffect(() => {
+    if (playlistVideos.length > 0) {
+      const fetchVideo = async () => {
+        const result = await getVideo({
+          id: playlistVideos[playlistVideos.length - 1]
+        })
+        setVideos((prev) => prev.concat(result.items[0]))
+      }
+      fetchVideo()
+    }
+  }, [playlistVideos.length])
 
   return (
     <Droppable droppableId='playlist'>
@@ -15,9 +35,9 @@ const PlayList = () => {
             {...provided.droppableProps}
             ref={provided.innerRef}
           >
-            {playlistVideos.map((item, index) => {
+            {videos.map((item, index) => {
               return (
-                <Draggable key={item} draggableId={item} index={index}>
+                <Draggable key={item.id} draggableId={item.id} index={index}>
                   {(provided) => {
                     return (
                       <li
@@ -25,16 +45,18 @@ const PlayList = () => {
                         {...provided.dragHandleProps}
                         ref={provided.innerRef}
                       >
-                        <VideoItem
-                          width='560'
-                          height='315'
-                          src={`https://www.youtube.com/embed/${item}`}
-                          title='YouTube video player'
-                          frameborder='0'
-                          id={item}
-                          allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
-                          allowfullscreen
-                        ></VideoItem>
+                        <CardContainer>
+                          <CardImage
+                            src={item.snippet.thumbnails.medium.url}
+                            id={item.id}
+                          ></CardImage>
+                          <CardContent>
+                            <CardTitle>{item.snippet.title}</CardTitle>
+                            <CardDescription>
+                              {item.snippet.description}
+                            </CardDescription>
+                          </CardContent>
+                        </CardContainer>
                       </li>
                     )
                   }}
