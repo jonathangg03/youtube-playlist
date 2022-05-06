@@ -1,5 +1,8 @@
 import styled from 'styled-components'
 
+/*
+! CONDITIONAL NOT WORKING 
+*/
 const PlayListContainer = styled.ul`
   background-color: #f7f7f7;
   padding: 20px;
@@ -14,6 +17,11 @@ const PlayListContainer = styled.ul`
   max-height: 620px;
   width: 100%;
   max-width: 280px;
+  ${({ videos }) =>
+    videos &&
+    `
+      display: flex;
+    `}
 
   @media screen and (min-width: 768px) {
     grid-template-columns: repeat(2, 1fr);
@@ -55,11 +63,22 @@ const CardDescription = styled.p`
   font-size: 1.2rem;
 `
 
+const DropTitle = styled.h2`
+  font-size: 3rem;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+`
+
 export {
   PlayListContainer,
   CardContainer,
   CardImage,
   CardContent,
   CardTitle,
-  CardDescription
+  CardDescription,
+  DropTitle
 }

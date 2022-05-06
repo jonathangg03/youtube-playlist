@@ -7,7 +7,8 @@ import {
   CardContent,
   CardDescription,
   CardImage,
-  CardTitle
+  CardTitle,
+  DropTitle
 } from './styles'
 import searchContext from '../../Context/searchContext'
 
@@ -32,38 +33,45 @@ const PlayList = () => {
       {(provided) => {
         return (
           <PlayListContainer
+            videos={videos.length > 0}
             {...provided.droppableProps}
             ref={provided.innerRef}
           >
-            {videos.map((item, index) => {
-              return (
-                <Draggable key={item.id} draggableId={item.id} index={index}>
-                  {(provided) => {
-                    return (
-                      <li
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        ref={provided.innerRef}
-                      >
-                        <CardContainer>
-                          <CardImage
-                            src={item.snippet.thumbnails.medium.url}
-                            id={item.id}
-                          ></CardImage>
-                          <CardContent>
-                            <CardTitle>{item.snippet.title}</CardTitle>
-                            <CardDescription>
-                              {item.snippet.description}
-                            </CardDescription>
-                          </CardContent>
-                        </CardContainer>
-                      </li>
-                    )
-                  }}
-                </Draggable>
-              )
-            })}
+            {videos &&
+              videos.map((item, index) => {
+                return (
+                  <Draggable key={item.id} draggableId={item.id} index={index}>
+                    {(provided) => {
+                      return (
+                        <li
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          ref={provided.innerRef}
+                        >
+                          <CardContainer>
+                            <CardImage
+                              src={item.snippet.thumbnails.medium.url}
+                              id={item.id}
+                            ></CardImage>
+                            <CardContent>
+                              <CardTitle>{item.snippet.title}</CardTitle>
+                              <CardDescription>
+                                {item.snippet.description}
+                              </CardDescription>
+                            </CardContent>
+                          </CardContainer>
+                        </li>
+                      )
+                    }}
+                  </Draggable>
+                )
+              })}
             {provided.placeholder}
+            {!videos.length && (
+              <DropTitle>
+                Arrastra hasta aquí los videos que quieras ver
+              </DropTitle>
+            )}
           </PlayListContainer>
         )
       }}
