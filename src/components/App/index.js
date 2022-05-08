@@ -41,10 +41,10 @@ const App = () => {
       result.source.droppableId === 'playlist' &&
       result.destination.droppableId === 'playlist'
     ) {
-      const oldOrder = [...playlistVideos]
-      const [recordedItem] = oldOrder.splice(result.source.index, 1)
-      oldOrder.splice(result.destination.index, 0, recordedItem)
-      setPlaylistVideos(oldOrder)
+      const playlist = [...playlistVideos]
+      const [recordedItem] = playlist.splice(result.source.index, 1)
+      playlist.splice(result.destination.index, 0, recordedItem)
+      setPlaylistVideos(playlist)
     }
   }
 

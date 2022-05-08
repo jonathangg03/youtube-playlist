@@ -5,29 +5,14 @@ import {
   PlayListContainer,
   CardContainer,
   CardContent,
-  CardDescription,
   DndIcon,
-  CardImage,
-  CardTitle
+  CardImage
 } from './styles'
 import searchContext from '../../Context/searchContext'
 import dnd from '../../../public/dnd.png'
 
 const PlayList = () => {
   const { playlistVideos } = useContext(searchContext)
-  const [videos, setVideos] = useState([])
-
-  useEffect(() => {
-    if (playlistVideos.length > 0) {
-      const fetchVideo = async () => {
-        const result = await getVideo({
-          id: playlistVideos[playlistVideos.length - 1]
-        })
-        setVideos((prev) => prev.concat(result.items[0]))
-      }
-      fetchVideo()
-    }
-  }, [playlistVideos.length])
 
   return (
     <Droppable droppableId='playlist'>
@@ -51,7 +36,8 @@ const PlayList = () => {
                           {console.log(item)}
                           <CardImage
                             iframe
-                            src={`https://www.youtube.com/embed/${item}`}
+                            src={`https://www.youtube.com/embed/${item}?playlist=${playlistVideos}`}
+                            auto
                             title='YouTube video player'
                             frameborder='0'
                             allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
