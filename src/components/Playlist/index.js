@@ -6,10 +6,12 @@ import {
   CardContainer,
   CardContent,
   CardDescription,
+  DndIcon,
   CardImage,
   CardTitle
 } from './styles'
 import searchContext from '../../Context/searchContext'
+import dnd from '../../../public/dnd.png'
 
 const PlayList = () => {
   const { playlistVideos } = useContext(searchContext)
@@ -35,7 +37,7 @@ const PlayList = () => {
             {...provided.droppableProps}
             ref={provided.innerRef}
           >
-            {videos.map((item, index) => {
+            {playlistVideos.map((item, index) => {
               return (
                 <Draggable key={item.id} draggableId={item.id} index={index}>
                   {(provided) => {
@@ -55,10 +57,7 @@ const PlayList = () => {
                             allowfullscreen
                           ></CardImage>
                           <CardContent>
-                            <CardTitle>{item.snippet.title}</CardTitle>
-                            <CardDescription>
-                              {item.snippet.description}
-                            </CardDescription>
+                            <DndIcon src={dnd} />
                           </CardContent>
                         </CardContainer>
                       </li>

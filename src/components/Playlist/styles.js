@@ -11,18 +11,18 @@ const PlayListContainer = styled.ul`
   margin: 20px auto;
   list-style: none;
   min-height: 300px;
-  max-height: 620px;
+  max-height: 2000px;
   width: 100%;
   max-width: 280px;
 
   @media screen and (min-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     max-width: 728px;
   }
 
   @media screen and (min-width: 1024px) {
     max-width: 984px;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(1, 1fr);
   }
 `
 
@@ -30,11 +30,10 @@ const CardContainer = styled.div`
   background-color: white;
   min-height: 350px;
   height: 100%;
-  border-radius: 15px;
+  border-radius: 0 0 15px 15px;
   overflow: hidden;
   width: 100%;
   box-shadow: 2px 1px 6px 0px #0000002b;
-  padding-bottom: 30px;
 `
 
 const CardImage = styled.iframe`
@@ -44,7 +43,15 @@ const CardImage = styled.iframe`
 `
 
 const CardContent = styled.section`
-  padding: 10px 25px 0;
+  display: flex;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+`
+
+const DndIcon = styled.img`
+  width: 28px;
+  height: 28px;
 `
 
 const CardTitle = styled.h2`
@@ -52,9 +59,7 @@ const CardTitle = styled.h2`
   padding-bottom: 5px;
 `
 
-const CardDescription = styled.p`
-  font-size: 1.2rem;
-`
+const CardDescription = styled.div``
 
 export {
   PlayListContainer,
@@ -62,5 +67,6 @@ export {
   CardImage,
   CardContent,
   CardTitle,
-  CardDescription
+  CardDescription,
+  DndIcon
 }

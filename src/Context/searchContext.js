@@ -3,14 +3,17 @@ import { createContext, useState } from 'react'
 const Context = createContext({})
 
 const SearchContextProvider = ({ children }) => {
-  const [items, setItems] = useState([
+  const [items, setItems] = useState([])
+  const [search, setSearch] = useState({
+    query: '',
+    maxResults: 1,
+    nextPageToken: ''
+  })
+  const [playlistVideos, setPlaylistVideos] = useState([
     {
       kind: 'youtube#searchResult',
       etag: 'aw_zht8heMspKIByieGHnyn_6B8',
-      id: {
-        kind: 'youtube#video',
-        videoId: 'DTgBLQKRQuA'
-      },
+      id: 'DTgBLQKRQuA',
       snippet: {
         publishedAt: '2021-05-20T03:00:03Z',
         channelId: 'UCaXkIU1QidjPwiAYu6GcHjg',
@@ -41,12 +44,6 @@ const SearchContextProvider = ({ children }) => {
       }
     }
   ])
-  const [search, setSearch] = useState({
-    query: '',
-    maxResults: 1,
-    nextPageToken: ''
-  })
-  const [playlistVideos, setPlaylistVideos] = useState([])
 
   return (
     <Context.Provider

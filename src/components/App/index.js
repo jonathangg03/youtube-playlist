@@ -31,6 +31,11 @@ const App = () => {
         prev.filter((el) => el.id.videoId !== result.draggableId)
       )
       setPlaylistVideos((prev) => prev.concat(result.draggableId))
+    } else if (
+      result.source.droppableId === 'playlist' &&
+      result.destination.droppableId === 'playlist'
+    ) {
+      console.log(result)
     }
   }
 
