@@ -39,7 +39,7 @@ const PlayList = () => {
           >
             {playlistVideos.map((item, index) => {
               return (
-                <Draggable key={item.id} draggableId={item.id} index={index}>
+                <Draggable key={item} draggableId={item} index={index}>
                   {(provided) => {
                     return (
                       <li
@@ -48,9 +48,10 @@ const PlayList = () => {
                         ref={provided.innerRef}
                       >
                         <CardContainer>
+                          {console.log(item)}
                           <CardImage
                             iframe
-                            src={`https://www.youtube.com/embed/${item.id}`}
+                            src={`https://www.youtube.com/embed/${item}`}
                             title='YouTube video player'
                             frameborder='0'
                             allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'

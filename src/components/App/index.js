@@ -9,8 +9,14 @@ import { Button } from '../SearchForm/styles'
 import { DragDropContext } from 'react-beautiful-dnd'
 
 const App = () => {
-  const { items, setSearch, search, setItems, setPlaylistVideos } =
-    useContext(SearchContext)
+  const {
+    items,
+    setSearch,
+    search,
+    setItems,
+    setPlaylistVideos,
+    playlistVideos
+  } = useContext(SearchContext)
 
   const handleSearch = async (event) => {
     event.preventDefault()
@@ -35,7 +41,10 @@ const App = () => {
       result.source.droppableId === 'playlist' &&
       result.destination.droppableId === 'playlist'
     ) {
-      console.log(result)
+      const oldOrder = [...playlistVideos]
+      const [recordedItem] = oldOrder.splice(result.source.index, 1)
+      oldOrder.splice(result.destination.index, 0, recordedItem)
+      setPlaylistVideos(oldOrder)
     }
   }
 
