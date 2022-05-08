@@ -47,8 +47,12 @@ const PlayList = () => {
                       >
                         <CardContainer>
                           <CardImage
-                            src={item.snippet.thumbnails.medium.url}
-                            id={item.id}
+                            iframe
+                            src={`https://www.youtube.com/embed/${item.id}`}
+                            title='YouTube video player'
+                            frameborder='0'
+                            allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+                            allowfullscreen
                           ></CardImage>
                           <CardContent>
                             <CardTitle>{item.snippet.title}</CardTitle>

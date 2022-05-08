@@ -29,6 +29,7 @@ const PlayListContainer = styled.ul`
 const CardContainer = styled.div`
   background-color: white;
   min-height: 350px;
+  height: 100%;
   border-radius: 15px;
   overflow: hidden;
   width: 100%;
@@ -36,9 +37,9 @@ const CardContainer = styled.div`
   padding-bottom: 30px;
 `
 
-const CardImage = styled.img`
+const CardImage = styled.iframe`
   width: 100%;
-  height: 150px;
+  height: 300px;
   object-fit: cover;
 `
 
