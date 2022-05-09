@@ -7,6 +7,7 @@ import SearchForm from '../SearchForm'
 import getVideos from '../../services/getVideos'
 import { Button } from '../SearchForm/styles'
 import { DragDropContext } from 'react-beautiful-dnd'
+import { CardImage } from '../Playlist/styles'
 
 const App = () => {
   const {
@@ -56,6 +57,15 @@ const App = () => {
         <VideosList items={items} />
         {items.length && <Button onClick={handleSearch}>Cargar más</Button>}
         <PlayList></PlayList>
+        <CardImage
+          iframe
+          src={`https://www.youtube.com/embed?playlist=${playlistVideos}&controls={0}`}
+          controls={0}
+          title='YouTube video player'
+          frameborder='0'
+          allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+          allowfullscreen
+        ></CardImage>
       </DragDropContext>
     </>
   )

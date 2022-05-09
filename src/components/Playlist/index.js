@@ -1,6 +1,5 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useRef, useEffect } from 'react'
 import { Droppable, Draggable } from 'react-beautiful-dnd'
-import getVideo from '../../services/getVideo'
 import {
   PlayListContainer,
   CardContainer,
@@ -13,6 +12,9 @@ import dnd from '../../../public/dnd.png'
 
 const PlayList = () => {
   const { playlistVideos } = useContext(searchContext)
+  const handleEnded = () => {
+    console.log('end')
+  }
 
   return (
     <Droppable droppableId='playlist'>
@@ -33,11 +35,10 @@ const PlayList = () => {
                         ref={provided.innerRef}
                       >
                         <CardContainer>
-                          {console.log(item)}
                           <CardImage
                             iframe
-                            src={`https://www.youtube.com/embed/${item}?playlist=${playlistVideos}`}
-                            auto
+                            src={`https://www.youtube.com/embed/${item}`}
+                            controls={0}
                             title='YouTube video player'
                             frameborder='0'
                             allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
