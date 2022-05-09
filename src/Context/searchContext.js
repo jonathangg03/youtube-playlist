@@ -9,12 +9,7 @@ const SearchContextProvider = ({ children }) => {
     maxResults: 1,
     nextPageToken: ''
   })
-  const [playlistVideos, setPlaylistVideos] = useState([
-    'DTgBLQKRQuA',
-    'bgURkoGJ0hs',
-    'K5OvG9GJOZE',
-    'nDQZZMzXotg'
-  ])
+  const [playlistVideos, setPlaylistVideos] = useState([])
 
   return (
     <Context.Provider

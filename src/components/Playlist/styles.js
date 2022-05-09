@@ -1,19 +1,35 @@
 import styled from 'styled-components'
 
+const Container = styled.section`
+  width: 100%;
+  max-width: 280px;
+  margin: 0 auto;
+  @media screen and (min-width: 768px) {
+    max-width: 728px;
+  }
+
+  @media screen and (min-width: 1024px) {
+    max-width: 984px;
+  }
+`
+
+const Title = styled.h2`
+  font-size: 1.8rem;
+  margin-top: 20px;
+`
+
 const PlayListContainer = styled.ul`
   background-color: #f7f7f7;
   padding: 20px;
-  width: 1000px;
   display: grid;
   grid-template-columns: 1fr;
   overflow-y: auto;
   gap: 20px;
-  margin: 20px auto;
+  margin: 20px 0;
   list-style: none;
   min-height: 300px;
   max-height: 2000px;
   width: 100%;
-  max-width: 280px;
 
   @media screen and (min-width: 768px) {
     grid-template-columns: repeat(1, 1fr);
@@ -62,6 +78,8 @@ const CardTitle = styled.h2`
 const CardDescription = styled.div``
 
 export {
+  Container,
+  Title,
   PlayListContainer,
   CardContainer,
   CardImage,
