@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import VideosList from '../VideosList'
 import PlayList from '../Playlist'
 import SearchContext from '../../Context/searchContext'
@@ -7,7 +7,7 @@ import SearchForm from '../SearchForm'
 import getVideos from '../../services/getVideos'
 import { Button } from '../SearchForm/styles'
 import { DragDropContext } from 'react-beautiful-dnd'
-import { CardImage } from '../Playlist/styles'
+import Player from '../Player'
 
 const App = () => {
   const {
@@ -18,6 +18,7 @@ const App = () => {
     setPlaylistVideos,
     playlistVideos
   } = useContext(SearchContext)
+  const [dragging, setDragging] = useState(false)
 
   const handleSearch = async (event) => {
     event.preventDefault()
@@ -32,12 +33,12 @@ const App = () => {
   }
 
   const handleOnDragEnd = (result) => {
-    console.log(result)
     if (result.destination.droppableId !== result.source.droppableId) {
       setItems((prev) =>
         prev.filter((el) => el.id.videoId !== result.draggableId)
       )
       setPlaylistVideos((prev) => prev.concat(result.draggableId))
+      setDragging(false)
     } else if (
       result.source.droppableId === 'playlist' &&
       result.destination.droppableId === 'playlist'
@@ -49,23 +50,29 @@ const App = () => {
     }
   }
 
+  const handleDragUpdate = (results) => {
+    if (
+      results.destination.droppableId === 'playlist' &&
+      results.source.droppableId === 'videos'
+    ) {
+      setDragging(true)
+    } else {
+      setDragging(false)
+    }
+  }
+
   return (
     <>
-      <DragDropContext onDragEnd={handleOnDragEnd}>
+      <DragDropContext
+        onDragEnd={handleOnDragEnd}
+        onDragUpdate={handleDragUpdate}
+      >
         <Title>YouTube Playlist Creator</Title>
         <SearchForm />
         <VideosList items={items} />
         {items.length && <Button onClick={handleSearch}>Cargar más</Button>}
-        <PlayList></PlayList>
-        <CardImage
-          iframe
-          src={`https://www.youtube.com/embed?playlist=${playlistVideos}&controls={0}`}
-          controls={0}
-          title='YouTube video player'
-          frameborder='0'
-          allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
-          allowfullscreen
-        ></CardImage>
+        <PlayList dragging={dragging}></PlayList>
+        <Player playlistVideos={playlistVideos} />
       </DragDropContext>
     </>
   )

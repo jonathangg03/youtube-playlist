@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { colors } from '../../../themes'
 
 const Container = styled.section`
   width: 100%;
@@ -19,6 +20,7 @@ const Title = styled.h2`
 `
 
 const PlayListContainer = styled.ul`
+  position: relative;
   background-color: #f7f7f7;
   padding: 20px;
   display: grid;
@@ -30,6 +32,7 @@ const PlayListContainer = styled.ul`
   min-height: 300px;
   max-height: 2000px;
   width: 100%;
+  border: ${(props) => props.dragging && `4px dashed ${colors.main}`};
 
   @media screen and (min-width: 768px) {
     grid-template-columns: repeat(1, 1fr);
@@ -40,6 +43,13 @@ const PlayListContainer = styled.ul`
     max-width: 984px;
     grid-template-columns: repeat(1, 1fr);
   }
+`
+
+const DndMessage = styled.p`
+  font-size: 2rem;
+  position: absolute;
+  top: calc(50% - 15px);
+  left: calc(50% - 289.28px);
 `
 
 const CardContainer = styled.div`
@@ -81,6 +91,7 @@ export {
   Container,
   Title,
   PlayListContainer,
+  DndMessage,
   CardContainer,
   CardImage,
   CardContent,

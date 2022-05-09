@@ -4,6 +4,7 @@ import {
   Container,
   Title,
   PlayListContainer,
+  DndMessage,
   CardContainer,
   CardContent,
   DndIcon,
@@ -12,7 +13,7 @@ import {
 import searchContext from '../../Context/searchContext'
 import dnd from '../../../public/dnd.png'
 
-const PlayList = () => {
+const PlayList = ({ dragging }) => {
   const { playlistVideos } = useContext(searchContext)
 
   return (
@@ -24,7 +25,13 @@ const PlayList = () => {
             <PlayListContainer
               {...provided.droppableProps}
               ref={provided.innerRef}
+              dragging={dragging}
             >
+              {playlistVideos.length === 0 && (
+                <DndMessage>
+                  Arrastra hasta aquí los videos para agregarlos a la playlist
+                </DndMessage>
+              )}
               {playlistVideos.map((item, index) => {
                 return (
                   <Draggable key={item} draggableId={item} index={index}>
@@ -37,9 +44,7 @@ const PlayList = () => {
                         >
                           <CardContainer>
                             <CardImage
-                              iframe
                               src={`https://www.youtube.com/embed/${item}`}
-                              controls={0}
                               title='YouTube video player'
                               frameborder='0'
                               allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
