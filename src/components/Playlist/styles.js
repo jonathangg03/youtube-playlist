@@ -1,57 +1,83 @@
 import styled from 'styled-components'
+import { colors } from '../../../themes'
 
-/*
-! CONDITIONAL NOT WORKING 
-*/
-const PlayListContainer = styled.ul`
-  background-color: #f7f7f7;
-  padding: 20px;
-  width: 1000px;
-  display: grid;
-  grid-template-columns: 1fr;
-  overflow-y: auto;
-  gap: 20px;
-  margin: 20px auto;
-  list-style: none;
-  min-height: 300px;
-  max-height: 620px;
+const Container = styled.section`
   width: 100%;
   max-width: 280px;
-  ${({ videos }) =>
-    videos &&
-    `
-      display: flex;
-    `}
-
+  margin: 0 auto;
   @media screen and (min-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
     max-width: 728px;
   }
 
   @media screen and (min-width: 1024px) {
     max-width: 984px;
-    grid-template-columns: repeat(3, 1fr);
   }
+`
+
+const Title = styled.h2`
+  font-size: 1.8rem;
+  margin-top: 20px;
+`
+
+const PlayListContainer = styled.ul`
+  position: relative;
+  background-color: #f7f7f7;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr;
+  overflow-y: auto;
+  gap: 20px;
+  margin: 20px 0;
+  list-style: none;
+  min-height: 300px;
+  max-height: 2000px;
+  width: 100%;
+  border: ${(props) => props.dragging && `4px dashed ${colors.main}`};
+
+  @media screen and (min-width: 768px) {
+    grid-template-columns: repeat(1, 1fr);
+    max-width: 728px;
+  }
+
+  @media screen and (min-width: 1024px) {
+    max-width: 984px;
+    grid-template-columns: repeat(1, 1fr);
+  }
+`
+
+const DndMessage = styled.p`
+  font-size: 2rem;
+  position: absolute;
+  top: calc(50% - 15px);
+  left: calc(50% - 289.28px);
 `
 
 const CardContainer = styled.div`
   background-color: white;
   min-height: 350px;
-  border-radius: 15px;
+  height: 100%;
+  border-radius: 0 0 15px 15px;
   overflow: hidden;
   width: 100%;
   box-shadow: 2px 1px 6px 0px #0000002b;
-  padding-bottom: 30px;
 `
 
-const CardImage = styled.img`
+const CardImage = styled.iframe`
   width: 100%;
-  height: 150px;
+  height: 300px;
   object-fit: cover;
 `
 
 const CardContent = styled.section`
-  padding: 10px 25px 0;
+  display: flex;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+`
+
+const DndIcon = styled.img`
+  width: 28px;
+  height: 28px;
 `
 
 const CardTitle = styled.h2`
@@ -59,26 +85,17 @@ const CardTitle = styled.h2`
   padding-bottom: 5px;
 `
 
-const CardDescription = styled.p`
-  font-size: 1.2rem;
-`
-
-const DropTitle = styled.h2`
-  font-size: 3rem;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-`
+const CardDescription = styled.div``
 
 export {
+  Container,
+  Title,
   PlayListContainer,
+  DndMessage,
   CardContainer,
   CardImage,
   CardContent,
   CardTitle,
   CardDescription,
-  DropTitle
+  DndIcon
 }

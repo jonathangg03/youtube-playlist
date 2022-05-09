@@ -1,46 +1,40 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext } from 'react'
 import { Droppable, Draggable } from 'react-beautiful-dnd'
-import getVideo from '../../services/getVideo'
 import {
+  Container,
+  Title,
   PlayListContainer,
+  DndMessage,
   CardContainer,
   CardContent,
-  CardDescription,
-  CardImage,
-  CardTitle,
-  DropTitle
+  DndIcon,
+  CardImage
 } from './styles'
 import searchContext from '../../Context/searchContext'
+import dnd from '../../../public/dnd.png'
 
-const PlayList = () => {
+const PlayList = ({ dragging }) => {
   const { playlistVideos } = useContext(searchContext)
-  const [videos, setVideos] = useState([])
-
-  useEffect(() => {
-    if (playlistVideos.length > 0) {
-      const fetchVideo = async () => {
-        const result = await getVideo({
-          id: playlistVideos[playlistVideos.length - 1]
-        })
-        setVideos((prev) => prev.concat(result.items[0]))
-      }
-      fetchVideo()
-    }
-  }, [playlistVideos.length])
 
   return (
-    <Droppable droppableId='playlist'>
-      {(provided) => {
-        return (
-          <PlayListContainer
-            videos={videos.length > 0}
-            {...provided.droppableProps}
-            ref={provided.innerRef}
-          >
-            {videos &&
-              videos.map((item, index) => {
+    <Container>
+      <Title>Playlist:</Title>
+      <Droppable droppableId='playlist'>
+        {(provided) => {
+          return (
+            <PlayListContainer
+              {...provided.droppableProps}
+              ref={provided.innerRef}
+              dragging={dragging}
+            >
+              {playlistVideos.length === 0 && (
+                <DndMessage>
+                  Arrastra hasta aquí los videos para agregarlos a la playlist
+                </DndMessage>
+              )}
+              {playlistVideos.map((item, index) => {
                 return (
-                  <Draggable key={item.id} draggableId={item.id} index={index}>
+                  <Draggable key={item} draggableId={item} index={index}>
                     {(provided) => {
                       return (
                         <li
@@ -50,14 +44,14 @@ const PlayList = () => {
                         >
                           <CardContainer>
                             <CardImage
-                              src={item.snippet.thumbnails.medium.url}
-                              id={item.id}
+                              src={`https://www.youtube.com/embed/${item}`}
+                              title='YouTube video player'
+                              frameborder='0'
+                              allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+                              allowfullscreen
                             ></CardImage>
                             <CardContent>
-                              <CardTitle>{item.snippet.title}</CardTitle>
-                              <CardDescription>
-                                {item.snippet.description}
-                              </CardDescription>
+                              <DndIcon src={dnd} />
                             </CardContent>
                           </CardContainer>
                         </li>
@@ -66,17 +60,14 @@ const PlayList = () => {
                   </Draggable>
                 )
               })}
-            {provided.placeholder}
-            {!videos.length && (
-              <DropTitle>
-                Arrastra hasta aquí los videos que quieras ver
-              </DropTitle>
-            )}
-          </PlayListContainer>
-        )
-      }}
-    </Droppable>
+              {provided.placeholder}
+            </PlayListContainer>
+          )
+        }}
+      </Droppable>
+    </Container>
   )
 }
 
 export default PlayList
+
