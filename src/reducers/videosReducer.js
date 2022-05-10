@@ -7,6 +7,8 @@ const initialState = {
 const types = {
   SET_FINDED_VIDEOS: 'set_search_videos',
   ADD_FINDED_VIDEOS: 'add_finded_videos',
+  DELETE_FINDED_VIDEO: 'delete_finded_video',
+  ADD_PLAYLIST_VIDEO: 'add_playlist_video',
   SET_PLAYLIST_VIDEOS: 'set_playlist_videos',
   SET_SEARCH_QUERY: 'change_search_query',
   SET_SEARCH_MAX: 'change_search_max'
@@ -41,6 +43,21 @@ const videosReducer = (state, actions) => {
           nextPageToken: actions.payload.nextPageToken
         },
         findedVideos: [...state.findedVideos, ...actions.payload.findedVideos]
+      }
+    case types.DELETE_FINDED_VIDEO:
+      return {
+        ...state,
+        findedVideos: actions.payload
+      }
+    case types.ADD_PLAYLIST_VIDEO:
+      return {
+        ...state,
+        playlistVideos: [...state.playlistVideos, actions.payload]
+      }
+    case types.SET_PLAYLIST_VIDEOS:
+      return {
+        ...state,
+        playlistVideos: actions.payload
       }
     default:
       return state

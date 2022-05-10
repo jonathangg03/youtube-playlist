@@ -14,7 +14,7 @@ import videosContext from '../../Context/videosContext'
 import dnd from '../../../public/dnd.png'
 
 const PlayList = ({ dragging }) => {
-  const { playlistVideos } = useContext(videosContext)
+  const { store, dispatch } = useContext(videosContext)
 
   return (
     <Container>
@@ -27,12 +27,12 @@ const PlayList = ({ dragging }) => {
               ref={provided.innerRef}
               dragging={dragging}
             >
-              {playlistVideos.length === 0 && (
+              {store.playlistVideos.length === 0 && (
                 <DndMessage>
                   Arrastra hasta aquí los videos para agregarlos a la playlist
                 </DndMessage>
               )}
-              {playlistVideos.map((item, index) => {
+              {store.playlistVideos.map((item, index) => {
                 return (
                   <Draggable key={item} draggableId={item} index={index}>
                     {(provided) => {
