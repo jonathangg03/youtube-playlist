@@ -1,52 +1,64 @@
 import { useContext, useState } from 'react'
 import VideosList from '../VideosList'
 import PlayList from '../Playlist'
-import SearchContext from '../../Context/searchContext'
+import videosContext from '../../Context/videosContext'
 import { Title } from './styles'
 import SearchForm from '../SearchForm'
 import getVideos from '../../services/getVideos'
 import { Button } from '../SearchForm/styles'
 import { DragDropContext } from 'react-beautiful-dnd'
+import { types } from '../../reducers/videosReducer'
 import Player from '../Player'
 
 const App = () => {
-  const {
-    items,
-    setSearch,
-    search,
-    setItems,
-    setPlaylistVideos,
-    playlistVideos
-  } = useContext(SearchContext)
+  const { store, dispatch, disableButton } = useContext(videosContext)
   const [dragging, setDragging] = useState(false)
 
   const handleSearch = async (event) => {
+    //Load more videos
     event.preventDefault()
     const results = await getVideos({
-      q: search.query,
-      maxResults: search.maxResults,
-      pageToken: search.nextPageToken
+      q: store.search.query,
+      maxResults: store.search.maxResults,
+      pageToken: store.search.nextPageToken
     })
-
-    setItems((prev) => prev.concat(results.items))
-    setSearch({ ...search, nextPageToken: results.nextPageToken })
+    dispatch({
+      type: types.ADD_FINDED_VIDEOS,
+      payload: results.items
+    })
+    dispatch({
+      type: types.SET_SEARCH_NEXT_PAGE,
+      payload: results.nextPageToken
+    })
   }
 
   const handleOnDragEnd = (result) => {
     if (result.destination.droppableId !== result.source.droppableId) {
-      setItems((prev) =>
-        prev.filter((el) => el.id.videoId !== result.draggableId)
+      //Send from VideosList to Playlist or viceversa
+
+      const newFindedVideos = store.findedVideos.filter(
+        (video) => video.id.videoId !== result.draggableId
       )
-      setPlaylistVideos((prev) => prev.concat(result.draggableId))
+      dispatch({ type: types.DELETE_FINDED_VIDEO, payload: newFindedVideos }) //Delete dregged from VideosList
+      dispatch({
+        //Add dregged to Playlist
+        type: types.ADD_PLAYLIST_VIDEO,
+        payload: result.draggableId
+      })
       setDragging(false)
     } else if (
+      //Move one inside playlist
       result.source.droppableId === 'playlist' &&
       result.destination.droppableId === 'playlist'
     ) {
-      const playlist = [...playlistVideos]
+      const playlist = [...store.playlistVideos]
       const [recordedItem] = playlist.splice(result.source.index, 1)
       playlist.splice(result.destination.index, 0, recordedItem)
-      setPlaylistVideos(playlist)
+      dispatch({
+        //Add dregged to Playlist
+        type: types.SET_PLAYLIST_VIDEOS,
+        payload: playlist
+      })
     }
   }
 
@@ -69,10 +81,12 @@ const App = () => {
       >
         <Title>YouTube Playlist Creator</Title>
         <SearchForm />
-        <VideosList items={items} />
-        {items.length && <Button onClick={handleSearch}>Cargar más</Button>}
+        <VideosList items={store.findedVideos} />
+        <Button onClick={handleSearch} disabled={disableButton}>
+          Cargar más
+        </Button>
         <PlayList dragging={dragging}></PlayList>
-        <Player playlistVideos={playlistVideos} />
+        <Player playlistVideos={store.playlistVideos} />
       </DragDropContext>
     </>
   )
