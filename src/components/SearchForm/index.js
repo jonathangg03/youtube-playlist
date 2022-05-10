@@ -2,25 +2,24 @@ import { useContext } from 'react'
 import videosContext from '../../Context/videosContext'
 import getVideos from '../../services/getVideos'
 import { Form, SearchInput, Button, MaxLabel } from './styles'
+import { types } from '../../reducers/videosReducer'
 
 const SearchForm = () => {
-  const { setItems, search, setSearch } = useContext(videosContext)
-
-  const handleInputChange = (event) => {
-    setSearch({
-      ...search,
-      [event.target.name]: event.target.value
-    })
-  }
+  const { store, dispatch } = useContext(videosContext)
 
   const handleSearch = async (event) => {
     event.preventDefault()
     const results = await getVideos({
-      q: search.query,
-      maxResults: search.maxResults
+      q: store.search.query,
+      maxResults: store.search.maxResults
     })
-    setItems(results.items)
-    setSearch({ ...search, nextPageToken: results.nextPageToken })
+    dispatch({
+      type: types.SET_FINDED_VIDEOS,
+      payload: {
+        findedVideos: results.items,
+        nextPageToken: results.nextPageToken
+      }
+    })
   }
 
   return (
@@ -28,18 +27,26 @@ const SearchForm = () => {
       <Form onSubmit={handleSearch}>
         <SearchInput
           placeholder='Ingresa una palabra para realizar una busqueda...'
-          value={search.query}
-          onChange={handleInputChange}
-          name='query'
+          value={store.search.query}
+          onChange={(event) =>
+            dispatch({
+              type: types.SET_SEARCH_QUERY,
+              payload: event.target.value
+            })
+          }
         />
         <MaxLabel>
           <span>Cantidad de resultados: </span>
           <SearchInput
             type='number'
-            name='maxResults'
-            onChange={handleInputChange}
+            onChange={(event) =>
+              dispatch({
+                type: types.SET_SEARCH_MAX,
+                payload: event.target.value
+              })
+            }
             min={1}
-            value={search.maxResults}
+            value={store.search.maxResults}
           />
         </MaxLabel>
         <Button>Buscar</Button>
