@@ -33,7 +33,7 @@ const Button = styled.button`
   width: 200px;
   margin: 10px auto 0;
   outline: none;
-  background-color: ${colors.main};
+  background-color: ${(props) => (props.disabled ? '#f49b95' : colors.main)};
   font-weight: 600;
   color: white;
 `

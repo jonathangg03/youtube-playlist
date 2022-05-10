@@ -5,10 +5,11 @@ import { Form, SearchInput, Button, MaxLabel } from './styles'
 import { types } from '../../reducers/videosReducer'
 
 const SearchForm = () => {
-  const { store, dispatch } = useContext(videosContext)
+  const { store, dispatch, setDisabledButton } = useContext(videosContext)
 
   const handleSearch = async (event) => {
     event.preventDefault()
+    setDisabledButton(false)
     const results = await getVideos({
       q: store.search.query,
       maxResults: store.search.maxResults
@@ -29,23 +30,25 @@ const SearchForm = () => {
         <SearchInput
           placeholder='Ingresa una palabra para realizar una busqueda...'
           value={store.search.query}
-          onChange={(event) =>
+          onChange={(event) => {
+            setDisabledButton(true)
             dispatch({
               type: types.SET_SEARCH_QUERY,
               payload: event.target.value
             })
-          }
+          }}
         />
         <MaxLabel>
           <span>Cantidad de resultados: </span>
           <SearchInput
             type='number'
-            onChange={(event) =>
+            onChange={(event) => {
+              setDisabledButton(true)
               dispatch({
                 type: types.SET_SEARCH_MAX,
                 payload: event.target.value
               })
-            }
+            }}
             min={1}
             value={store.search.maxResults}
           />

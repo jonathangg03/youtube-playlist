@@ -5,19 +5,15 @@ const Context = createContext({})
 
 const VideosContextProvider = ({ children }) => {
   const [store, dispatch] = useReducer(videosReducer, initialState)
-  // const [items, setItems] = useState([])
-  // const [search, setSearch] = useState({
-  //   query: '',
-  //   maxResults: 1,
-  //   nextPageToken: ''
-  // })
-  // const [playlistVideos, setPlaylistVideos] = useState([])
+  const [disableButton, setDisabledButton] = useState(true)
 
   return (
     <Context.Provider
       value={{
         store,
-        dispatch
+        dispatch,
+        disableButton,
+        setDisabledButton
       }}
     >
       {children}

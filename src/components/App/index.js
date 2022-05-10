@@ -11,10 +11,11 @@ import { types } from '../../reducers/videosReducer'
 import Player from '../Player'
 
 const App = () => {
-  const { store, dispatch } = useContext(videosContext)
+  const { store, dispatch, disableButton } = useContext(videosContext)
   const [dragging, setDragging] = useState(false)
 
   const handleSearch = async (event) => {
+    //Load more videos
     event.preventDefault()
     const results = await getVideos({
       q: store.search.query,
@@ -81,9 +82,9 @@ const App = () => {
         <Title>YouTube Playlist Creator</Title>
         <SearchForm />
         <VideosList items={store.findedVideos} />
-        {store.findedVideos.length && (
-          <Button onClick={handleSearch}>Cargar más</Button>
-        )}
+        <Button onClick={handleSearch} disabled={disableButton}>
+          Cargar más
+        </Button>
         <PlayList dragging={dragging}></PlayList>
         <Player playlistVideos={store.playlistVideos} />
       </DragDropContext>
