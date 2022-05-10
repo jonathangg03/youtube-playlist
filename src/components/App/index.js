@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react'
 import VideosList from '../VideosList'
 import PlayList from '../Playlist'
-import SearchContext from '../../Context/searchContext'
+import videosContext from '../../Context/videosContext'
 import { Title } from './styles'
 import SearchForm from '../SearchForm'
 import getVideos from '../../services/getVideos'
@@ -17,7 +17,7 @@ const App = () => {
     setItems,
     setPlaylistVideos,
     playlistVideos
-  } = useContext(SearchContext)
+  } = useContext(videosContext)
   const [dragging, setDragging] = useState(false)
 
   const handleSearch = async (event) => {

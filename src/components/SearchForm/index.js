@@ -1,10 +1,10 @@
 import { useContext } from 'react'
-import SearchContext from '../../Context/searchContext'
+import videosContext from '../../Context/videosContext'
 import getVideos from '../../services/getVideos'
 import { Form, SearchInput, Button, MaxLabel } from './styles'
 
 const SearchForm = () => {
-  const { setItems, search, setSearch } = useContext(SearchContext)
+  const { setItems, search, setSearch } = useContext(videosContext)
 
   const handleInputChange = (event) => {
     setSearch({

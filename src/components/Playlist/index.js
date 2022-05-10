@@ -10,11 +10,11 @@ import {
   DndIcon,
   CardImage
 } from './styles'
-import searchContext from '../../Context/searchContext'
+import videosContext from '../../Context/videosContext'
 import dnd from '../../../public/dnd.png'
 
 const PlayList = ({ dragging }) => {
-  const { playlistVideos } = useContext(searchContext)
+  const { playlistVideos } = useContext(videosContext)
 
   return (
     <Container>
@@ -70,4 +70,3 @@ const PlayList = ({ dragging }) => {
 }
 
 export default PlayList
-
