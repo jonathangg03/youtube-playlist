@@ -21,13 +21,13 @@ const App = () => {
       maxResults: store.search.maxResults,
       pageToken: store.search.nextPageToken
     })
-
     dispatch({
       type: types.ADD_FINDED_VIDEOS,
-      payload: {
-        findedVideos: results.items,
-        nextPageToken: results.nextPageToken
-      }
+      payload: results.items
+    })
+    dispatch({
+      type: types.SET_SEARCH_NEXT_PAGE,
+      payload: results.nextPageToken
     })
   }
 

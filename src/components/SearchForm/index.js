@@ -15,10 +15,11 @@ const SearchForm = () => {
     })
     dispatch({
       type: types.SET_FINDED_VIDEOS,
-      payload: {
-        findedVideos: results.items,
-        nextPageToken: results.nextPageToken
-      }
+      payload: results.items
+    })
+    dispatch({
+      type: types.SET_SEARCH_NEXT_PAGE,
+      payload: results.nextPageToken
     })
   }
 

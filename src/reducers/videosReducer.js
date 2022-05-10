@@ -11,7 +11,8 @@ const types = {
   ADD_PLAYLIST_VIDEO: 'add_playlist_video',
   SET_PLAYLIST_VIDEOS: 'set_playlist_videos',
   SET_SEARCH_QUERY: 'change_search_query',
-  SET_SEARCH_MAX: 'change_search_max'
+  SET_SEARCH_MAX: 'change_search_max',
+  SET_SEARCH_NEXT_PAGE: 'change_search_next_page'
 }
 
 const videosReducer = (state, actions) => {
@@ -26,23 +27,20 @@ const videosReducer = (state, actions) => {
         ...state,
         search: { ...state.search, maxResults: actions.payload }
       }
+    case types.SET_SEARCH_NEXT_PAGE:
+      return {
+        ...state,
+        search: { ...state.search, nextPageToken: actions.payload }
+      }
     case types.SET_FINDED_VIDEOS:
       return {
         ...state,
-        search: {
-          ...state.search,
-          nextPageToken: actions.payload.nextPageToken
-        },
-        findedVideos: actions.payload.findedVideos
+        findedVideos: actions.payload
       }
     case types.ADD_FINDED_VIDEOS:
       return {
         ...state,
-        search: {
-          ...state.search,
-          nextPageToken: actions.payload.nextPageToken
-        },
-        findedVideos: [...state.findedVideos, ...actions.payload.findedVideos]
+        findedVideos: [...state.findedVideos, ...actions.payload]
       }
     case types.DELETE_FINDED_VIDEO:
       return {
