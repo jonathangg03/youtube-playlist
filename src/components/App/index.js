@@ -4,33 +4,13 @@ import PlayList from '../Playlist'
 import videosContext from '../../Context/videosContext'
 import { Title } from './styles'
 import SearchForm from '../SearchForm'
-import getVideos from '../../services/getVideos'
 import { DragDropContext } from 'react-beautiful-dnd'
 import { types } from '../../reducers/videosReducer'
 import Player from '../Player'
 
 const App = () => {
-  const { store, dispatch, disableButton } = useContext(videosContext)
+  const { store, dispatch } = useContext(videosContext)
   const [dragging, setDragging] = useState(false)
-
-  const handleLoadMore = async (event) => {
-    //Load more videos
-    //Load more videos
-    event.preventDefault()
-    const results = await getVideos({
-      q: store.search.query,
-      maxResults: store.search.maxResults,
-      pageToken: store.search.nextPageToken
-    })
-    dispatch({
-      type: types.ADD_FINDED_VIDEOS,
-      payload: results.items
-    })
-    dispatch({
-      type: types.SET_SEARCH_NEXT_PAGE,
-      payload: results.nextPageToken
-    })
-  }
 
   const handleOnDragEnd = (result) => {
     //Finish the drag
@@ -83,11 +63,7 @@ const App = () => {
       >
         <Title>YouTube Playlist Creator</Title>
         <SearchForm />
-        <VideosList
-          items={store.findedVideos}
-          handleClick={handleLoadMore}
-          disabled={disableButton}
-        />
+        <VideosList items={store.findedVideos} />
         <PlayList dragging={dragging}></PlayList>
         <Player playlistVideos={store.playlistVideos} />
       </DragDropContext>
