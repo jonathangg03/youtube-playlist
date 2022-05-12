@@ -1,7 +1,9 @@
+import { videoIDList, videoList } from '../videoMocks'
+
 const initialState = {
-  findedVideos: [],
+  findedVideos: [...videoList],
   search: { query: '', maxResults: 1, nextPageToken: '' },
-  playlistVideos: []
+  playlistVideos: [...videoIDList]
 }
 
 const types = {
