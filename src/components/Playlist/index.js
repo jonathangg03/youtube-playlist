@@ -14,7 +14,7 @@ import videosContext from '../../Context/videosContext'
 import dnd from '../../../public/dnd.png'
 
 const PlayList = ({ dragging }) => {
-  const { store, dispatch } = useContext(videosContext)
+  const { store } = useContext(videosContext)
 
   return (
     <Container>

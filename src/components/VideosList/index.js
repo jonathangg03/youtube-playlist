@@ -1,8 +1,9 @@
 import VideoItem from '../VideoItem'
 import { VideoList, Title, Container } from './styles'
+import { Button } from '../SearchForm/styles'
 import { Droppable, Draggable } from 'react-beautiful-dnd'
 
-const VideosList = ({ items }) => {
+const VideosList = ({ items, handleClick, disabled }) => {
   return (
     <Container>
       <Title>Resultados de busqueda:</Title>
@@ -37,6 +38,9 @@ const VideosList = ({ items }) => {
           )
         }}
       </Droppable>
+      <Button onClick={handleClick} disabled={disabled}>
+        Cargar más
+      </Button>
     </Container>
   )
 }

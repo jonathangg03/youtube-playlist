@@ -34,6 +34,7 @@ const Button = styled.button`
   margin: 10px auto 0;
   outline: none;
   background-color: ${(props) => (props.disabled ? '#f49b95' : colors.main)};
+  cursor: ${(props) => (props.disabled ? 'default' : 'pointer')};
   font-weight: 600;
   color: white;
 `
