@@ -4,6 +4,7 @@ import { Container, Title, Video } from './styles'
 
 const Player = () => {
   const { store } = useContext(videosContext)
+
   return (
     <Container>
       <Title>Reproductor:</Title>

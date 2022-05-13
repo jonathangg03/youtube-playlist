@@ -46,24 +46,19 @@ const PlayListContainer = styled.ul`
 `
 
 const DndMessage = styled.p`
-  font-size: 2rem;
+  font-size: 1.5rem;
+  width: 225px;
   position: absolute;
   top: calc(50% - 15px);
-  left: calc(50% - 289.28px);
+  left: calc(50% - 112.5px);
+  text-align: center;
+
+  @media screen and (min-width: 768px) {
+    font-size: 2rem;
+    width: initial;
+    top: calc(50% - 15px);
+    left: calc(50% - 289.28px);
+  }
 `
 
-const CardTitle = styled.h2`
-  font-size: 1.8rem;
-  padding-bottom: 5px;
-`
-
-const CardDescription = styled.div``
-
-export {
-  Container,
-  Title,
-  PlayListContainer,
-  DndMessage,
-  CardTitle,
-  CardDescription
-}
+export { Container, Title, PlayListContainer, DndMessage }
