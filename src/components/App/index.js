@@ -63,9 +63,9 @@ const App = () => {
       >
         <Title>YouTube Playlist Creator</Title>
         <SearchForm />
-        <VideosList items={store.findedVideos} />
+        <VideosList />
         <PlayList dragging={dragging}></PlayList>
-        <Player playlistVideos={store.playlistVideos} />
+        <Player />
       </DragDropContext>
     </>
   )
