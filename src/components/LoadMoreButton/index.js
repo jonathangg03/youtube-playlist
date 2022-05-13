@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import videosContext from '../../Context/videosContext'
 import { Button } from '../SearchForm/styles'
 import getVideos from '../../services/getVideos'
+import { types } from '../../reducers/videosReducer'
 
 const LoadMoreButton = () => {
   const { store, dispatch, disableButton } = useContext(videosContext)
