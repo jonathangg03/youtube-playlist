@@ -1,8 +1,13 @@
+import { useContext } from 'react'
+import videosContext from '../../Context/videosContext'
 import VideoItem from '../VideoItem'
 import { VideoList, Title, Container } from './styles'
+import LoadMoreButton from '../LoadMoreButton'
 import { Droppable, Draggable } from 'react-beautiful-dnd'
 
-const VideosList = ({ items }) => {
+const VideosList = () => {
+  const { store } = useContext(videosContext)
+
   return (
     <Container>
       <Title>Resultados de busqueda:</Title>
@@ -10,7 +15,7 @@ const VideosList = ({ items }) => {
         {(provided) => {
           return (
             <VideoList {...provided.droppableProps} ref={provided.innerRef}>
-              {items.map((item, index) => {
+              {store.findedVideos.map((item, index) => {
                 return (
                   <Draggable
                     key={item.id.videoId}
@@ -37,6 +42,7 @@ const VideosList = ({ items }) => {
           )
         }}
       </Droppable>
+      <LoadMoreButton>Cargar más</LoadMoreButton>
     </Container>
   )
 }

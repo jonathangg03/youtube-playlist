@@ -1,13 +1,13 @@
 import styled from 'styled-components'
-import { colors } from '../../../themes'
 
 const Container = styled.section`
   width: 100%;
   max-width: 280px;
-  height: 500px;
+  height: 200px;
   margin: 0 auto;
   @media screen and (min-width: 768px) {
     max-width: 728px;
+    height: 500px;
   }
 
   @media screen and (min-width: 1024px) {

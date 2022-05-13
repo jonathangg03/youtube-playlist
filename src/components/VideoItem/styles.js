@@ -21,7 +21,7 @@ const CardContent = styled.section`
 `
 
 const CardTitle = styled.h2`
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   padding-bottom: 5px;
 `
 

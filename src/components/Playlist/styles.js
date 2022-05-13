@@ -46,56 +46,19 @@ const PlayListContainer = styled.ul`
 `
 
 const DndMessage = styled.p`
-  font-size: 2rem;
+  font-size: 1.5rem;
+  width: 225px;
   position: absolute;
   top: calc(50% - 15px);
-  left: calc(50% - 289.28px);
+  left: calc(50% - 112.5px);
+  text-align: center;
+
+  @media screen and (min-width: 768px) {
+    font-size: 2rem;
+    width: initial;
+    top: calc(50% - 15px);
+    left: calc(50% - 289.28px);
+  }
 `
 
-const CardContainer = styled.div`
-  background-color: white;
-  min-height: 350px;
-  height: 100%;
-  border-radius: 0 0 15px 15px;
-  overflow: hidden;
-  width: 100%;
-  box-shadow: 2px 1px 6px 0px #0000002b;
-`
-
-const CardImage = styled.iframe`
-  width: 100%;
-  height: 300px;
-  object-fit: cover;
-`
-
-const CardContent = styled.section`
-  display: flex;
-  height: 40px;
-  justify-content: center;
-  align-items: center;
-`
-
-const DndIcon = styled.img`
-  width: 28px;
-  height: 28px;
-`
-
-const CardTitle = styled.h2`
-  font-size: 1.8rem;
-  padding-bottom: 5px;
-`
-
-const CardDescription = styled.div``
-
-export {
-  Container,
-  Title,
-  PlayListContainer,
-  DndMessage,
-  CardContainer,
-  CardImage,
-  CardContent,
-  CardTitle,
-  CardDescription,
-  DndIcon
-}
+export { Container, Title, PlayListContainer, DndMessage }

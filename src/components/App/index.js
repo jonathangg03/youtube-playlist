@@ -4,35 +4,16 @@ import PlayList from '../Playlist'
 import videosContext from '../../Context/videosContext'
 import { Title } from './styles'
 import SearchForm from '../SearchForm'
-import getVideos from '../../services/getVideos'
-import { Button } from '../SearchForm/styles'
 import { DragDropContext } from 'react-beautiful-dnd'
 import { types } from '../../reducers/videosReducer'
 import Player from '../Player'
 
 const App = () => {
-  const { store, dispatch, disableButton } = useContext(videosContext)
+  const { store, dispatch } = useContext(videosContext)
   const [dragging, setDragging] = useState(false)
 
-  const handleSearch = async (event) => {
-    //Load more videos
-    event.preventDefault()
-    const results = await getVideos({
-      q: store.search.query,
-      maxResults: store.search.maxResults,
-      pageToken: store.search.nextPageToken
-    })
-    dispatch({
-      type: types.ADD_FINDED_VIDEOS,
-      payload: results.items
-    })
-    dispatch({
-      type: types.SET_SEARCH_NEXT_PAGE,
-      payload: results.nextPageToken
-    })
-  }
-
   const handleOnDragEnd = (result) => {
+    //Finish the drag
     if (result.destination.droppableId !== result.source.droppableId) {
       //Send from VideosList to Playlist or viceversa
 
@@ -63,6 +44,7 @@ const App = () => {
   }
 
   const handleDragUpdate = (results) => {
+    //Update Playlist
     if (
       results.destination.droppableId === 'playlist' &&
       results.source.droppableId === 'videos'
@@ -81,12 +63,9 @@ const App = () => {
       >
         <Title>YouTube Playlist Creator</Title>
         <SearchForm />
-        <VideosList items={store.findedVideos} />
-        <Button onClick={handleSearch} disabled={disableButton}>
-          Cargar más
-        </Button>
+        <VideosList />
         <PlayList dragging={dragging}></PlayList>
-        <Player playlistVideos={store.playlistVideos} />
+        <Player />
       </DragDropContext>
     </>
   )

@@ -25,37 +25,35 @@ const SearchForm = () => {
   }
 
   return (
-    <>
-      <Form onSubmit={handleSearch}>
+    <Form onSubmit={handleSearch}>
+      <SearchInput
+        placeholder='Ingresa una palabra para realizar una busqueda...'
+        value={store.search.query}
+        onChange={(event) => {
+          setDisabledButton(true)
+          dispatch({
+            type: types.SET_SEARCH_QUERY,
+            payload: event.target.value
+          })
+        }}
+      />
+      <MaxLabel>
+        <span>Cantidad de resultados: </span>
         <SearchInput
-          placeholder='Ingresa una palabra para realizar una busqueda...'
-          value={store.search.query}
+          type='number'
           onChange={(event) => {
             setDisabledButton(true)
             dispatch({
-              type: types.SET_SEARCH_QUERY,
+              type: types.SET_SEARCH_MAX,
               payload: event.target.value
             })
           }}
+          min={1}
+          value={store.search.maxResults}
         />
-        <MaxLabel>
-          <span>Cantidad de resultados: </span>
-          <SearchInput
-            type='number'
-            onChange={(event) => {
-              setDisabledButton(true)
-              dispatch({
-                type: types.SET_SEARCH_MAX,
-                payload: event.target.value
-              })
-            }}
-            min={1}
-            value={store.search.maxResults}
-          />
-        </MaxLabel>
-        <Button>Buscar</Button>
-      </Form>
-    </>
+      </MaxLabel>
+      <Button>Buscar</Button>
+    </Form>
   )
 }
 
