@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { colors } from '../../../themes'
+import { colors } from '../../themes'
 
 const Container = styled.section`
   width: 100%;
