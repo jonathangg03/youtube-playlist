@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "webpack serve --config ./webpack.dev.js --mode development --env development",
     "build": "webpack --mode production --env production",
-    "start": "node ./dist/build",
+    "start": "node ./server/server.js",
+    "dev:serv": "nodemon ./server/server.js",
     "prestart": "npm run build"
   },
   "repository": {
@@ -45,6 +46,7 @@
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
     "babel-loader": "^8.2.5",
+    "nodemon": "^2.0.16",
     "webpack-dev-server": "^4.8.1"
   }
 }
