@@ -2,46 +2,51 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const Dotenv = require('dotenv-webpack')
 
-module.exports = {
-  entry: './src/index.js',
-  output: {
-    path: path.join(__dirname, '/public/dist'),
-    filename: 'bundle.js',
-    publicPath: '/'
-  },
-  resolve: {
-    extensions: ['.js']
-  },
-  module: {
-    rules: [
-      {
-        test: /\.js?$/,
-        exclude: /node_modules/,
-        use: 'babel-loader'
-      },
-      {
-        test: /.html$/,
-        use: 'html-loader'
-      },
-      {
-        test: /.(scss|css)$/,
-        use: ['style-loader', 'css-loader']
-      },
-      {
-        test: /\.(jpg|png)$/,
-        use: 'file-loader'
-      }
-    ]
-  },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: path.join(__dirname, '/public/index.html')
-      // favicon: './public/Icon.png'
-    })
-  ],
-  devServer: {
-    port: 3000,
-    historyApiFallback: true,
-    compress: true
+module.exports = (env) => {
+  return {
+    entry: './src/index.js',
+    output: {
+      path: path.join(__dirname, '/public/dist'),
+      filename: 'bundle.js',
+      publicPath: '/'
+    },
+    resolve: {
+      extensions: ['.js']
+    },
+    module: {
+      rules: [
+        {
+          test: /\.js?$/,
+          exclude: /node_modules/,
+          use: 'babel-loader'
+        },
+        {
+          test: /.html$/,
+          use: 'html-loader'
+        },
+        {
+          test: /.(scss|css)$/,
+          use: ['style-loader', 'css-loader']
+        },
+        {
+          test: /\.(jpg|png)$/,
+          use: 'file-loader'
+        }
+      ]
+    },
+    plugins: [
+      new HtmlWebpackPlugin({
+        template: path.join(__dirname, '/public/index.html')
+        // favicon: './public/Icon.png'
+      }),
+      new Dotenv({
+        path: `./.env${env.file ? `.${env.file}` : ''}`
+      })
+    ],
+    devServer: {
+      port: 3000,
+      historyApiFallback: true,
+      compress: true
+    }
   }
 }
