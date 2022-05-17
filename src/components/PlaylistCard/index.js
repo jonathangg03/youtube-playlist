@@ -1,4 +1,4 @@
-import dnd from '../../../../public/dnd.png'
+import dnd from '../../../public/dnd.png'
 import { CardContainer, CardContent, DndIcon, CardImage } from './styles'
 
 const PlaylistCard = ({ item }) => {

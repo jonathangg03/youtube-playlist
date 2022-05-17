@@ -3,10 +3,10 @@ const cors = require('cors')
 const path = require('path')
 const app = express()
 
-app.set('port', process.env.PORT)
+app.set('port', 3002)
 
 app.use(cors())
-app.use('/playlist', express.static(path.join(__dirname, '../dist/index.html')))
+app.use(express.static(path.join(__dirname, '/public/dist')))
 
 app.listen(app.get('port'), () =>
   console.log(`Listen on port:${app.get('port')}`)

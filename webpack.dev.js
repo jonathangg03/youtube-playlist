@@ -4,9 +4,9 @@ const Dotenv = require('dotenv-webpack')
 
 module.exports = (env) => {
   return {
-    entry: './frontend/src/index.js',
+    entry: '/src/index.js',
     output: {
-      path: path.resolve(__dirname, 'dist'),
+      path: path.join(__dirname, '/public/dist'),
       filename: 'bundle.js',
       publicPath: '/'
     },
