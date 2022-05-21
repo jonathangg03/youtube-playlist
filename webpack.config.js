@@ -47,13 +47,7 @@ module.exports = () => {
         template: path.join(__dirname, '/public/index.html')
         // favicon: './public/Icon.png'
       }),
-<<<<<<< HEAD
       new webpack.DefinePlugin(envKeys)
-=======
-      new Dotenv({
-        path: `./.env${env.file ? `.${env.file}` : ''}`
-      })
->>>>>>> 6dff49e3a7a463e9375e85cb89d8dd82172d36c5
     ],
     devServer: {
       port: 3000,
