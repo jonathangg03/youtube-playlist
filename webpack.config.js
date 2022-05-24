@@ -1,12 +1,11 @@
 const path = require('path')
-const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const Dotenv = require('dotenv-webpack')
 
 module.exports = {
   entry: './src/index.js',
   output: {
-    path: path.join(__dirname, '/public/dist'),
+    path: path.join(__dirname, '/dist'),
     filename: 'bundle.js',
     publicPath: '/'
   },
@@ -37,9 +36,10 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.join(__dirname, '/public/index.html')
-      // favicon: './public/Icon.png'
     }),
-    new Dotenv()
+    new Dotenv({
+      systemvars: true
+    })
   ],
   devServer: {
     port: 3000,

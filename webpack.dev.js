@@ -6,7 +6,7 @@ module.exports = (env) => {
   return {
     entry: '/src/index.js',
     output: {
-      path: path.join(__dirname, '/public/dist'),
+      path: path.join(__dirname, './dist'),
       filename: 'bundle.js',
       publicPath: '/'
     },
@@ -37,7 +37,6 @@ module.exports = (env) => {
     plugins: [
       new HtmlWebpackPlugin({
         template: path.join(__dirname, '/public/index.html')
-        // favicon: './public/Icon.png'
       }),
       new Dotenv({
         path: `./.env${env.file ? `.${env.file}` : ''}`
