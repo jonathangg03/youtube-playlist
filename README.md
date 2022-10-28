@@ -4,7 +4,7 @@ Una aplicación que realiza una busqueda usando la API de YouTube, y usando Drag
 and drop, se crea una playlist, y se puede ordenar de la misma forma. Para ver
 la aplicación, haz clic [aquí](https://youtube-playlist-ten.vercel.app/ 'aquí').
 
-[![YouTube Playlist](https://dav-dev.com/assets/projects/playlist.jpg 'Miriio')](https://dav-dev.com/assets/projects/playlist.jpg 'Miriio')
+[![YouTube Playlist](https://res.cloudinary.com/dklpyhteh/image/upload/v1661742489/Portfolio/playlist_fwcrav.png 'Miriio')](https://res.cloudinary.com/dklpyhteh/image/upload/v1661742489/Portfolio/playlist_fwcrav.png 'Miriio')
 
 ## Instrucciones de uso
 
